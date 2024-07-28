@@ -6,7 +6,7 @@ router.get('/', (req, res) => {
     res.json({
         message: 'Latency test',
         serverTimestamp: serverTimestamp,
-        serverProcessingTime: serverTimestamp - req.startTimestamp // Time taken by server to process the request
+        serverProcessingTime: serverTimestamp - req.startTimestamp 
     });
 });
 
