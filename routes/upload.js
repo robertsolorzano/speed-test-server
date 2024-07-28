@@ -7,17 +7,19 @@ router.post('/', (req, res) => {
 
     req.on('data', chunk => {
         uploadSize += chunk.length;
+        const elapsedTime = (Date.now() - startTime) / 1000; // in seconds
+        const mbps = (uploadSize * 8) / elapsedTime / (1024 * 1024); // Convert bytes to Mbps
+
+        res.write(JSON.stringify({
+            message: `Uploaded ${uploadSize} bytes`,
+            size: uploadSize,
+            elapsedTime: elapsedTime,
+            mbps: mbps.toFixed(2)
+        }) + "\n");
     });
 
     req.on('end', () => {
-        const endTime = Date.now();
-        const duration = (endTime - startTime) / 1000;
-        res.json({
-            message: `Uploaded ${uploadSize} bytes`,
-            size: uploadSize,
-            duration: duration,
-            timestamp: endTime
-        });
+        res.end();
     });
 });
 
