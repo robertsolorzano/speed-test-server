@@ -2,10 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  const timestamp = Date.now();
-  res.json({ message: 'Latency test', timestamp });
+    const serverTimestamp = Date.now();
+    res.json({
+        message: 'Latency test',
+        serverTimestamp: serverTimestamp,
+        serverProcessingTime: serverTimestamp - req.startTimestamp // Time taken by server to process the request
+    });
 });
 
 module.exports = router;
-
-
