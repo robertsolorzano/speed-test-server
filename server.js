@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 });
 
 const routes = require('./routes');
-app.use('/api', routes);
+app.use(routes);
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}/`);
